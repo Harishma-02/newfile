@@ -1,8 +1,18 @@
-import { Module } from '@nestjs/common';
-import { DrizzleService } from './drizzle.service';
+import { Module, Global } from '@nestjs/common';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
+@Global()
 @Module({
-  providers: [DrizzleService],
-  exports: [DrizzleService],
+  providers: [
+    {
+      provide: 'DRIZZLE',
+      useFactory: () => {
+        const client = postgres(process.env.DATABASE_URL="postgres://postgres:harisraj@localhost:5432/postgres");
+        return drizzle(client);
+      },
+    },
+  ],
+  exports: ['DRIZZLE'],
 })
 export class DatabaseModule {}
