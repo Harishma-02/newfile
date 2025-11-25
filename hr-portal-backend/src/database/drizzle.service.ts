@@ -8,7 +8,8 @@ export class DrizzleService {
 
   constructor() {
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.DATABASE_URL="postgres://postgres:harisraj@localhost:5432/postgres"
+,
     });
 
     this.db = drizzle({ client: pool });
