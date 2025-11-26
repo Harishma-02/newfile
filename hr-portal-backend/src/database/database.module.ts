@@ -8,7 +8,7 @@ import postgres from 'postgres';
     {
       provide: 'DRIZZLE',
       useFactory: () => {
-        const client = postgres(process.env.DATABASE_URL="postgres://postgres:harisraj@localhost:5432/postgres");
+        const client = postgres(process.env.DATABASE_URL as string);
         return drizzle(client);
       },
     },

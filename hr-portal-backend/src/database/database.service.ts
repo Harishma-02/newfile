@@ -12,7 +12,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   async onModuleInit() {
     // Initialize PostgreSQL connection pool
     this.pool = new Pool({
-      connectionString: process.env.DATABASE_URL="postgres://postgres:harisraj@localhost:5432/postgres"
+      connectionString: process.env.DATABASE_URL as string
 , // Set this in your .env
       // Optional settings:
       // ssl: { rejectUnauthorized: false },
