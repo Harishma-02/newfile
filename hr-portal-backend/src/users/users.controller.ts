@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-users.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('register')
+  @Post('signin')
   register(@Body() body: CreateUserDto) {
      console.log('Register hit!', body);
     return this.usersService.register(body);
