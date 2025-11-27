@@ -11,7 +11,7 @@ export class UsersService {
   constructor(private readonly dbService: DatabaseService) {}
 
   // REGISTER
-  async register(data: CreateUserDto) {
+  async signup(data: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(data.password, 10);
     const result = await this.dbService.db.insert(users)
       .values({ ...data, password: hashedPassword })
@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   // LOGIN
-  async login(data: { email: string; password: string }) {
+  async signin(data: { email: string; password: string }) {
     const result = await this.dbService.db.select().from(users).where(eq(users.email, data.email));
     if (!result.length) throw new UnauthorizedException('Invalid credentials');
 

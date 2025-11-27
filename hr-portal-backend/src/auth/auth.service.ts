@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
 import * as bcrypt from 'bcryptjs';
 import { DatabaseService } from '../database/database.service';
-import { users } from '../schema/user';
+import { users } from '../schema/users';
 
 @Injectable()
 export class AuthService {
@@ -10,13 +10,10 @@ export class AuthService {
 
   // AUTO REGISTER + LOGIN
   async loginOrRegister(name: string, email: string, password: string) {
-    // 1️⃣ Check if user already exists
-    const existingUser = await this.db.db
-      .select()
-      .from(users)
-      .where(eq(users.email, email));
+    // Check if user already exists
+    const existingUser = await this.db.db.select().from(users).where(eq(users.email, email));
 
-    // If user exists → LOGIN
+    // If user exists -> LOGIN
     if (existingUser.length > 0) {
       const user = existingUser[0];
 
@@ -35,7 +32,7 @@ export class AuthService {
       };
     }
 
-    // 2️⃣ If user NOT found → register automatically
+    // If user NOT found → register automatically
     const hash = await bcrypt.hash(password, 10);
 
     const [newUser] = await this.db.db
