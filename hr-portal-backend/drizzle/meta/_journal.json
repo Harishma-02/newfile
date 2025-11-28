@@ -15,6 +15,13 @@
       "when": 1763975373854,
       "tag": "0001_hot_veda",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1764310129962,
+      "tag": "0002_true_wallop",
+      "breakpoints": true
     }
   ]
 }
